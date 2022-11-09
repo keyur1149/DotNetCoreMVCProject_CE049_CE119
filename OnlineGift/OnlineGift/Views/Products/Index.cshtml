@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<OnlineGift.Models.Product>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor Accessor
+
+@{
+    ViewData["Title"] = "List of Prducts";
+}
+<div class="row" style="background-color: #0d836d; border-radius: 15px; box-shadow: 11px 12px 16px 5px #120a0a; justify-content: center; ">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem; margin: 17px; margin: 17px; border-radius: 10px; box-shadow: -6px 6px #0a0000; ">
+            <div style="display: flex; justify-content: center;">
+                <img class="card-img-top" src="@item.ImgUrl" alt="@item.Name" style="width: 256px;height: 200px;">
+            </div>
+            <div class="card-body" style="display: flex;flex-direction: column; align-items: center; ">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Desc</p>
+                <p class="card-text" style="font-weight:900;">Rs .@item.Prize</p>
+                @*<a href="#" class="btn btn-primary" style=" width: 245px; ">Add to Cart</a>*@
+
+                @if (@Accessor.HttpContext.Session.GetString("UserName") == null)
+                {
+                    <a class="btn btn-success text-white" asp-controller="Authenticate" asp-action="Login" asp-route-id="@item.Id" style="background-color:black;"><i class="bi bi-cart-plus"></i> Add to Cart </a>
+                }
+                else if (@Accessor.HttpContext.Session.GetString("UserName") == "Zenisha" || @Accessor.HttpContext.Session.GetString("UserName") == "keyur")
+                {
+                    <a class="btn btn-success text-white" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" style="background-color: black; width: 236px; margin: 10px; "><i class="bi bi-cart-plus"></i>Edit Item </a>
+                    <a class="btn btn-success text-white" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" style="background-color: black; width: 236px; "><i class="bi bi-cart-plus"></i>Delete Item </a>
+
+                }
+                else
+                {
+                    <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id" style="background-color:black;"><i class="bi bi-cart-plus"></i> Add to Cart </a>
+
+                }
+            </div>
+        </div>
+    }
+</div>
+

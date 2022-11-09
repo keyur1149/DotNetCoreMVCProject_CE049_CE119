@@ -1,0 +1,48 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Update a new Product";
+}
+
+
+<div class="row text" style="background: #00a989; border-radius: 10px; width: 666px; margin-left: 225px;">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete Product</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Delete">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ImgUrl" class="control-label"></label>
+                        <input asp-for="ImgUrl" class="form-control" />
+                        <span asp-validation-for="ImgUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Desc" class="control-label"></label>
+                        <input asp-for="Desc" class="form-control" />
+                        <span asp-validation-for="Desc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prize" class="control-label"></label>
+                        <input asp-for="Prize" type="number" class="form-control" />
+                        <span asp-validation-for="Prize" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" asp-for="Id"/>
+                        <input type="submit" value="Delete" style="background-color:black;color:white;" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" style="background-color:black;color:white;" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

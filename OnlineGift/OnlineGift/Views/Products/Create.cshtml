@@ -1,0 +1,44 @@
+﻿@model Product
+
+@{ 
+    ViewData["Title"] = "Add a new Product";
+}
+<div class="row text" style="background: #00a989; border-radius: 10px; width: 666px; margin-left: 225px;">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Add a New Product</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Desc" class="control-label"></label>
+                        <input asp-for="Desc" class="form-control" />
+                        <span asp-validation-for="Desc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImgUrl" class="control-label"></label>
+                        <input asp-for="ImgUrl" class="form-control" />
+                        <span asp-validation-for="ImgUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prize" class="control-label"></label>
+                        <input asp-for="Prize" class="form-control" />
+                        <span asp-validation-for="Prize" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn float-right" style="background-color: black; color: white;" />
+                        <a class="btn " asp-action="Index" style="background-color:black;color:white;">Show</a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

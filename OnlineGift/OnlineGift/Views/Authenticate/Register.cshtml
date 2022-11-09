@@ -1,0 +1,48 @@
+﻿@model OnlineGift.Data.ViewModel.RegisterViewModel
+
+@{ ViewBag.Title = "User Registration"; }
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center" style="background: #00a989;
+    border-radius: 10px;
+    width: 666px;margin-left: 225px;">
+        <div class="col-sm-12 col-md-12 col-lg-8" style="display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;">
+            <div><h1 class="mb-3">User Registration</h1></div>
+
+            <div class="row">
+                <div class=".col-md-12">
+                    <form method="post" asp-controller="Authenticate" asp-action="register">
+                        <div asp-validation-summary="All" class="text-danger">
+                            <div class="form-group">
+                                <label asp-for="UserName" style="color:black;"></label>
+                                <input asp-for="UserName" class="form-control" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                 
+                            <div class="form-group">
+                                <label asp-for="Email" style="color:black;"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" style="color:black;"></label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="password" style="color:black;"></label>
+                                <input asp-for="password" class="form-control" />
+                                <span asp-validation-for="password" class="text-danger"></span>
+                            </div>
+                       
+
+                        </div>
+                        <button class="btn" type="submit" style="background-color: black; color: white; margin-bottom: 10px;" class="btn">Register</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>

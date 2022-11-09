@@ -1,0 +1,94 @@
+﻿
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor Accessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Giftry</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3" style="background: #00a989;color:white">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Product" asp-action="Index" style="color: white; font-size: 22px; font-weight: 700;">Giftry</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item" >
+                            <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index" style="color:white;"><i class="bi bi-film"></i> Products</a>
+                        </li>
+                    </ul>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    
+
+
+                    @*If the user is signed-in display Logout Link*@
+                    @{ bool val = true;
+                        if (@Accessor.HttpContext.Session.GetString("UserName") == null)
+                        {
+                            val = false;
+                        } }
+                    @if (val)
+                    {
+
+        <ul class="navbar-nav d-flex justify-content-end">
+            <li class="nav-item">
+                <form method="post" asp-controller="Authenticate" asp-action="logout">
+                    @*<a class="btn btn-primary" asp-area="" >Logout</a>*@
+                    <button type="submit" class="nav-link btn btn-danger">
+                        Logout
+                    </button>
+                </form>
+            </li>
+        </ul> }
+                    else
+                    {
+        <ul class="navbar-nav d-flex justify-content-end flex-grow-1" style="margin-left: 450px;">
+            <li class="nav-item">
+                <a asp-action="Login" asp-controller="Authenticate" asp-action="login" class="btn" style="margin: 10px; background-color: black; color: white;">Login</a>
+            </li>
+
+            <li class="nav-item" >
+                <a asp-action="Register" asp-controller="Authenticate" asp-action="register" class="btn" style="margin: 10px; background-color: black;color:white;">Register</a>
+            </li>
+        </ul>}
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+     
+               
+    <main role="main" class="pb-3">
+
+        @RenderBody()
+        @{ bool addproduct = false;
+            if (@Accessor.HttpContext.Session.GetString("UserName") == "Zenisha" || @Accessor.HttpContext.Session.GetString("UserName") == "Keyur")
+            {
+                addproduct = true;
+            } }
+        @if (addproduct)
+        {
+            <div style="position:fixed;right:25px;bottom:25px;" class="text-white">
+                <a asp-controller="Products" asp-action="Create" class="btn " style="background-color: black; color: white;">Add New</a>
+            </div>
+        }
+    </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
